@@ -12,13 +12,18 @@ public class MainActivity extends AppCompatActivity {
     String[] vowels = "aeiou".toUpperCase().split("");
     String[] consonants = "bcdfghjklmnprstvwxyz".toUpperCase().split("");
 
+    String[] letters = lettersGen(vowels, consonants);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] letters = lettersGen(vowels, consonants);
+
+        gridView = (GridView) findViewById(R.id.baseGridView);
+        gridView.setAdapter(new LetterAdapter(this, letters));
     }
+
 
     public String[] lettersGen(String[] vowels, String[] cons){
         String[] array = new String[16];
@@ -27,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<array.length;i++){
             int consOrVowel = rand.nextInt(1);
             if (consOrVowel == 0){
-                array[i] = cons[rand.nextInt(cons.length)];
+                array[i] = cons[rand.nextInt(cons.length)+1];
             } else {
-                array[i] = vowels[rand.nextInt(vowels.length)];
+                array[i] = vowels[rand.nextInt(vowels.length)+1];
             }
         }
 
